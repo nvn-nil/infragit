@@ -10,10 +10,16 @@ def main():
     args = parser.parse_args()
 
     command = args.command[0]
-    directory = os.getcwd() if not args.directory else os.path.abspath(os.path.join(os.getcwd(), args.directory))
+    directory = None
+    if not args.directory:
+        directory = os.getcwd()
+    else:
+        if os.path.isabs(args.directory):
+            directory = os.path.abspath(args.directory)
+        else:
+            directory = os.path.abspath(os.path.join(os.getcwd(), args.directory))
 
     if command == "init":
-        print("Creating folder:", os.path.join(directory, ".igit"))
         os.makedirs(os.path.join(directory, ".igit"), exist_ok=True)
 
 
