@@ -21,6 +21,7 @@ def main():
             directory = os.path.abspath(os.path.join(os.getcwd(), args.directory))
 
     if command == "init":
+        # TODO: Cleanup experimentation
         p = Popen(["terraform", "init"], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=directory)
         p.wait()
         output = p.stdout.read().decode()
