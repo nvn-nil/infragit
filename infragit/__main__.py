@@ -1,5 +1,5 @@
 import os
-from subprocess import Popen
+from subprocess import Popen, PIPE, STDOUT
 from argparse import ArgumentParser
 
 
@@ -21,9 +21,18 @@ def main():
             directory = os.path.abspath(os.path.join(os.getcwd(), args.directory))
 
     if command == "init":
-        os.makedirs(os.path.join(directory, ".igit"), exist_ok=True)
-        os.system("terraform init")
+        p = Popen(["terraform", "init"], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=directory)
+        p.wait()
+        output = p.stdout.read().decode()
 
+        if "The directory has no Terraform configuration files" in output:
+            # print("The directory has no Terraform configuration files.")
+            return 1
+        
+        print(output)
+
+        os.makedirs(os.path.join(directory, ".igit"), exist_ok=True)
+        return p.returncode
 
 if __name__=="__main__":
     main()
