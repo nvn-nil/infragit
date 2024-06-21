@@ -233,3 +233,4 @@ terraform.rc
 notes.txt
 **/*-cred.json
 .env*
+tests/example-infra/
