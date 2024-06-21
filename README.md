@@ -13,7 +13,7 @@ This is quite an ambitious project and it might be impossible to achieve. Howeve
 The initial version will focus on GCP (which is what I am most familiar with) and will implement the hooks into the lifecycle
 
 
-### Usable
+### Usage
 
 ```sh
 # Prepare .igit folder for igit related state and files
