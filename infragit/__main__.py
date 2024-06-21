@@ -1,4 +1,5 @@
 import os
+from subprocess import Popen
 from argparse import ArgumentParser
 
 
@@ -21,6 +22,7 @@ def main():
 
     if command == "init":
         os.makedirs(os.path.join(directory, ".igit"), exist_ok=True)
+        os.system("terraform init")
 
 
 if __name__=="__main__":
