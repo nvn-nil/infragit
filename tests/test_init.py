@@ -1,7 +1,6 @@
 import os
-from tempfile import TemporaryDirectory
 import unittest
-
+from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from infragit.__main__ import main
@@ -19,10 +18,12 @@ class TestInit(unittest.TestCase):
                 self.assertEqual(ret_code, 1)
 
                 with open(os.path.join(temp_dir, "main.tf"), "w") as fo:
-                    fo.write("""
+                    fo.write(
+                        """
                     resource "null_resource" "cluster" {}
-                    """)
-            
+                    """
+                    )
+
                 self.assertTrue(os.path.isfile(os.path.join(temp_dir, "main.tf")))
                 ret_code = main()
 
